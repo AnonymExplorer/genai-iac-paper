@@ -1,0 +1,5 @@
+---
+- hosts: kafka_brokers
+  become: yes
+  roles:
+    - kafka

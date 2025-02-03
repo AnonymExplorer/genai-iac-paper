@@ -1,0 +1,16 @@
+[redis_nodes]
+redis1 ansible_host=192.168.1.101
+redis2 ansible_host=192.168.1.102
+redis3 ansible_host=192.168.1.103
+
+[kafka_brokers]
+kafka1 ansible_host=192.168.1.104
+kafka2 ansible_host=192.168.1.105
+kafka3 ansible_host=192.168.1.106
+
+[spark_nodes]
+spark1 ansible_host=192.168.1.107
+spark2 ansible_host=192.168.1.108
+spark3 ansible_host=192.168.1.109
+spark4 ansible_host=192.168.1.110
+spark5 ansible_host=192.168.1.111

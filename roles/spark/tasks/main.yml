@@ -1,0 +1,38 @@
+---
+- name: Install Spark dependencies
+  apt:
+    name:
+      - openjdk-11-jdk
+      - scala
+    state: present
+    update_cache: yes
+
+- name: Download Spark
+  get_url:
+    url: "https://downloads.apache.org/spark/spark-{{ spark_version }}/spark-{{ spark_version }}-bin-hadoop3.tgz"
+    dest: /tmp/spark.tgz
+
+- name: Extract Spark
+  unarchive:
+    src: /tmp/spark.tgz
+    dest: /opt/
+    remote_src: yes
+
+- name: Create Spark configuration directory
+  file:
+    path: /opt/spark/conf
+    state: directory
+    mode: '0755'
+
+- name: Configure Spark
+  template:
+    src: spark-defaults.conf.j2
+    dest: /opt/spark/conf/spark-defaults.conf
+    mode: '0644'
+  notify: Restart Spark
+
+- name: Ensure Spark is running and enabled on boot
+  service:
+    name: spark
+    state: started
+    enabled: yes
